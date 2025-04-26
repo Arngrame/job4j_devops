@@ -89,40 +89,4 @@ class CalcControllerTest {
         assertThat(output.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
         assertThat(output.getBody()).isEqualTo(expected);
     }
-
-    @Test
-    public void whenFakeDuplicate() {
-        var input = new TwoArgs(-0, 0);
-        var expected = new Result(0);
-        var output = new CalcController().summarise(input);
-        assertThat(output.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
-        assertThat(output.getBody()).isEqualTo(expected);
-    }
-
-    @Test
-    public void whenFakeDuplicate2() {
-        var input = new TwoArgs(-0, 0);
-        var expected = new Result(0);
-        var output = new CalcController().summarise(input);
-        assertThat(output.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
-        assertThat(output.getBody()).isEqualTo(expected);
-    }
-
-    @Test
-    public void whenFakeDuplicate3() {
-        var input = new TwoArgs(-0, 0);
-        var expected = new Result(0);
-        var output = new CalcController().summarise(input);
-        assertThat(output.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
-        assertThat(output.getBody()).isEqualTo(expected);
-    }
-
-    @Test
-    public void whenFakeDuplicate4() {
-        var input = new TwoArgs(-0, 0);
-        var expected = new Result(0);
-        var output = new CalcController().summarise(input);
-        assertThat(output.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
-        assertThat(output.getBody()).isEqualTo(expected);
-    }
 }
