@@ -82,7 +82,7 @@ class CalcControllerTest {
     }
 
     @Test
-    public void whenBothZeroNumbers() {
+    public void whenBothZeroNumbers2() {
         var input = new TwoArgs(-0, 0);
         var expected = new Result(0);
         var output = new CalcController().summarise(input);
