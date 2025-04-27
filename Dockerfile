@@ -18,7 +18,7 @@ RUN jdeps --ignore-missing-deps -q \
 # exclude header files and man pages, forms output directory
 RUN jlink \
     --add-modules $(cat deps.info) \
-    --strip-debug
+    --strip-debug \
     --compress 2 \
     --no-header-files \
     --no-man-pages \
