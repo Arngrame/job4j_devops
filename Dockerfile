@@ -1,5 +1,8 @@
 # base gradle with jdk - building the project
 FROM gradle:8.11.1-jdk21 as builder
+
+WORKDIR /job4j_devops
+
 COPY . .
 # unzip to current directory
 RUN jar xf /build/libs/DevOps-1.0.0.jar
