@@ -37,6 +37,16 @@ RUN ls build/libs
 FROM debian:bookworm-slim
 ENV JAVA_HOME /user/java/jdk21
 ENV PATH $JAVA_HOME/bin:$PATH
+
+# check build
+RUN ls build/libs
+# check build
+RUN ls /build/libs
+# check build
+RUN ls /slim-jre
+# check build
+RUN ls slim-jre
+
 COPY --from=builder /slim-jre $JAVA_HOME
 COPY --from=builder build/libs/DevOps-1.0.0.jar .
 ENTRYPOINT ["java", "-jar", "DevOps-1.0.0.jar"]
