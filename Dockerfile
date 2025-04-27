@@ -24,11 +24,19 @@ RUN jlink \
     --no-man-pages \
     --output /slim-jre
 
+# check what builds
+RUN ls
+
+# check build
+RUN ls build
+
+# check build
+RUN ls build/libs
+
 # creates final image
 FROM debian:bookworm-slim
 ENV JAVA_HOME /user/java/jdk21
 ENV PATH $JAVA_HOME/bin:$PATH
-RUN ls
 COPY --from=builder /slim-jre $JAVA_HOME
 COPY --from=builder /build/libs/DevOps-1.0.0.jar .
 ENTRYPOINT ["java", "-jar", "DevOps-1.0.0.jar"]
