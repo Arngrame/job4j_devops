@@ -4,6 +4,7 @@ FROM gradle:8.11.1-jdk21 as builder
 WORKDIR /job4j_devops
 
 COPY . .
+RUN ls
 # unzip to current directory
 RUN jar xf /build/libs/DevOps-1.0.0.jar
 # analyzing class and module deps - leave needed, skip redundant / outdated - all it collects in deps.info
