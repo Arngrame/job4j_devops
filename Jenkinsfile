@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Check') {
             steps {
-                sh './gradlew check'
+                sh './gradlew check -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
             }
         }
         stage('Package') {
@@ -34,6 +34,13 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh 'docker build -t job4j_devops .'
+            }
+        }
+        stage('Update DB') {
+            steps {
+                script {
+                    sh './gradlew update -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                }
             }
         }
     }
