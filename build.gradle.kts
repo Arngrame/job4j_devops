@@ -36,6 +36,7 @@ tasks.jacocoTestCoverageVerification {
 
 repositories {
 	mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
