@@ -1,5 +1,8 @@
 # base gradle with jdk : copy gradle files and download dependencies
 FROM gradle:8.11.1-jdk21 as builder
+
+ARG IN_DOTENV_FILE_PATH
+
 RUN mkdir job4j_devops
 WORKDIR /job4j_devops
 COPY build.gradle.kts settings.gradle.kts gradle.properties ./
@@ -7,7 +10,10 @@ RUN gradle --no-daemon dependencies
 
 # copy sources and build skipping tests
 COPY . .
-RUN gradle --no-daemon build -x test -x jacocoTestReport -x jacocoTestCoverageVerification
+RUN gradle --no-daemon build -x test \
+    -x jacocoTestReport -x jacocoTestCoverageVerification \
+    -x checkstyleMain -x checkstyleTest \
+    -P"dotenv.filename"="$IN_DOTENV_FILE_PATH"
 
 # unzip to current directory
 RUN jar xf /job4j_devops/build/libs/DevOps-1.0.0.jar

@@ -5,6 +5,10 @@ pipeline {
         git 'Default'
     }
 
+    environment {
+        DOTENV_FILE_PATH = "/var/agent-jdk21/env/.env.develop"
+    }
+
     stages {
         stage('Prepare Environment') {
             steps {
@@ -13,33 +17,33 @@ pipeline {
         }
         stage('Check') {
             steps {
-                sh './gradlew check -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                sh './gradlew check -P"dotenv.filename"="$DOTENV_FILE_PATH"'
             }
         }
         stage('Package') {
             steps {
-                sh './gradlew build -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                sh './gradlew build -P"dotenv.filename"="$DOTENV_FILE_PATH"'
             }
         }
         stage('JaCoCo Report') {
             steps {
-                sh './gradlew jacocoTestReport -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                sh './gradlew jacocoTestReport -P"dotenv.filename"="$DOTENV_FILE_PATH"'
             }
         }
         stage('JaCoCo Verification') {
             steps {
-                sh './gradlew jacocoTestCoverageVerification -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                sh './gradlew jacocoTestCoverageVerification -P"dotenv.filename"="$DOTENV_FILE_PATH"'
             }
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t job4j_devops .'
+                sh 'docker build --build-arg IN_DOTENV_FILE_PATH=$DOTENV_FILE_PATH -t job4j_devops .'
             }
         }
         stage('Update DB') {
             steps {
                 script {
-                    sh './gradlew update -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                    sh './gradlew update -P"dotenv.filename"="$DOTENV_FILE_PATH"'
                 }
             }
         }
