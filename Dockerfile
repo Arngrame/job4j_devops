@@ -3,10 +3,6 @@ FROM gradle:8.11.1-jdk21 as builder
 RUN mkdir job4j_devops
 WORKDIR /job4j_devops
 COPY build.gradle.kts settings.gradle.kts gradle.properties ./
-RUN mkdir env
-COPY env/.env.local ./env
-RUN ls
-RUN ls env/
 RUN gradle --no-daemon dependencies
 
 # copy sources and build skipping tests

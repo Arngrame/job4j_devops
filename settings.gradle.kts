@@ -20,11 +20,3 @@ if (remoteCacheUrl != null) {
         }
     }
 }
-
-pluginManagement {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}

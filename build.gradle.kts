@@ -36,7 +36,6 @@ tasks.jacocoTestCoverageVerification {
 
 repositories {
 	mavenCentral()
-    gradlePluginPortal()
 }
 
 dependencies {
@@ -83,7 +82,6 @@ tasks.spotbugsMain {
 }
 
 tasks.test {
-    exclude("ru.job4j.devops.CalcApplicationTest")
     finalizedBy(tasks.spotbugsMain)
 }
 
