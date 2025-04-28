@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build --build-arg IN_DOTENV_FILE_PATH=$DOTENV_FILE_PATH -t job4j_devops .'
+                sh 'docker build -t job4j_devops .'
             }
         }
         stage('Update DB') {
