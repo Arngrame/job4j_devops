@@ -24,6 +24,10 @@ class CalcEventRepositoryTest extends ContainersConfig {
     @Autowired
     private UserRepository userRepository;
 
+    public CalcEventRepositoryTest() {
+        super();
+    }
+
     @Test
     public void whenAdditionPositive() {
         var user = new User();

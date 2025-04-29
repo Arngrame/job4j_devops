@@ -23,6 +23,10 @@ class UserSignUpEventListenerTest extends ContainersConfig {
     @Autowired
     private UserRepository userRepository;
 
+    public UserSignUpEventListenerTest() {
+        super();
+    }
+
     @Test
     void whenSignupNewMember() {
         var user = new User();

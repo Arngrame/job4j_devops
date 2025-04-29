@@ -20,7 +20,7 @@ public abstract class ContainersConfig {
             DockerImageName.parse("apache/kafka:3.7.2")
     );
 
-    static {
+    public ContainersConfig() {
         POSTGRES.start();
         KAFKA.start();
     }

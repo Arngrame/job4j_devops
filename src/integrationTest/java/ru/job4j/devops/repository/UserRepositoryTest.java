@@ -14,6 +14,10 @@ class UserRepositoryTest extends ContainersConfig {
     @Autowired
     private UserRepository userRepository;
 
+    public UserRepositoryTest() {
+        super();
+    }
+
     @Test
     public void whenSaveUser() {
         var user = new User();
