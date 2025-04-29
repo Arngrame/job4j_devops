@@ -58,6 +58,10 @@ dependencies {
     liquibaseRuntime("ch.qos.logback:logback-core:1.5.15")
     liquibaseRuntime("ch.qos.logback:logback-classic:1.5.15")
     liquibaseRuntime("info.picocli:picocli:4.6.1")
+
+    implementation("org.springframework.kafka:spring-kafka")
+    testImplementation("org.awaitility:awaitility")
+    testImplementation("org.testcontainers:kafka:1.20.4")
 }
 
 tasks.withType<Test> {
