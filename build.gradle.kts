@@ -50,6 +50,7 @@ dependencies {
     implementation("org.liquibase:liquibase-core:4.30.0")
     implementation("org.postgresql:postgresql:42.7.4")
     testImplementation("com.h2database:h2:1.4.200")
+    testImplementation("org.testcontainers:postgresql:1.20.4")
 
     liquibaseRuntime("org.liquibase:liquibase-core:4.30.0")
     liquibaseRuntime("org.postgresql:postgresql:42.7.4")
@@ -57,6 +58,10 @@ dependencies {
     liquibaseRuntime("ch.qos.logback:logback-core:1.5.15")
     liquibaseRuntime("ch.qos.logback:logback-classic:1.5.15")
     liquibaseRuntime("info.picocli:picocli:4.6.1")
+
+    implementation("org.springframework.kafka:spring-kafka")
+    testImplementation("org.awaitility:awaitility")
+    testImplementation("org.testcontainers:kafka:1.20.4")
 }
 
 tasks.withType<Test> {
@@ -137,4 +142,39 @@ tasks.named<Test>("test") {
     systemProperty("spring.datasource.url", env.DB_URL.value)
     systemProperty("spring.datasource.username", env.DB_USERNAME.value)
     systemProperty("spring.datasource.password", env.DB_PASSWORD.value)
+}
+
+val integrationTest by sourceSets.creating {
+    java {
+        srcDir("src/integrationTest/java")
+    }
+    resources {
+        srcDir("src/integrationTest/resources")
+    }
+
+    // Let the integrationTest classpath include the main and test outputs
+    compileClasspath += sourceSets["main"].output + sourceSets["test"].output
+    runtimeClasspath += sourceSets["main"].output + sourceSets["test"].output
+}
+
+val integrationTestImplementation by configurations.getting {
+    extendsFrom(configurations["testImplementation"])
+}
+val integrationTestRuntimeOnly by configurations.getting {
+    extendsFrom(configurations["testRuntimeOnly"])
+}
+
+tasks.register<Test>("integrationTest") {
+    description = "Runs the integration tests."
+    group = "verification"
+
+    testClassesDirs = integrationTest.output.classesDirs
+    classpath = integrationTest.runtimeClasspath
+
+    // Usually run after regular unit tests
+    shouldRunAfter(tasks.test)
+}
+
+tasks.check {
+    dependsOn("integrationTest")
 }
