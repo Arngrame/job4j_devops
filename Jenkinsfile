@@ -17,22 +17,22 @@ pipeline {
         }
         stage('Check') {
             steps {
-                sh './gradlew check -P"dotenv.filename"="$DOTENV_FILE_PATH"'
+                sh './gradlew check -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
             }
         }
         stage('Package') {
             steps {
-                sh './gradlew build -P"dotenv.filename"="$DOTENV_FILE_PATH"'
+                sh './gradlew build -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
             }
         }
         stage('JaCoCo Report') {
             steps {
-                sh './gradlew jacocoTestReport -P"dotenv.filename"="$DOTENV_FILE_PATH"'
+                sh './gradlew jacocoTestReport -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
             }
         }
         stage('JaCoCo Verification') {
             steps {
-                sh './gradlew jacocoTestCoverageVerification -P"dotenv.filename"="$DOTENV_FILE_PATH"'
+                sh './gradlew jacocoTestCoverageVerification -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
             }
         }
         stage('Docker Build') {
@@ -43,7 +43,7 @@ pipeline {
         stage('Update DB') {
             steps {
                 script {
-                    sh './gradlew update -P"dotenv.filename"="$DOTENV_FILE_PATH"'
+                    sh './gradlew update -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
                 }
             }
         }
