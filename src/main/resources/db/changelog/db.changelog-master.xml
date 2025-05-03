@@ -17,4 +17,7 @@
     <include file="changeset/004_ddl_create_calc_event_table.sql"
              author="Arngrame"
              relativeToChangelogFile="true"/>
+    <include file="changeset/005_ddl_create_result_table.sql"
+             author="Arngrame"
+             relativeToChangelogFile="true"/>
 </databaseChangeLog>
