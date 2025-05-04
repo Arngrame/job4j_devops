@@ -1,5 +1,5 @@
 # base gradle with jdk : copy gradle files and download dependencies
-FROM gradle:8.11.1-jdk21 as builder
+FROM gradle:8.11.1-jdk21 AS builder
 
 RUN mkdir job4j_devops
 WORKDIR /job4j_devops
@@ -30,8 +30,8 @@ RUN jlink \
 FROM debian:bookworm-slim
 
 # set env variables
-ENV JAVA_HOME /user/java/jdk21
-ENV PATH $JAVA_HOME/bin:$PATH
+ENV JAVA_HOME=/user/java/jdk21
+ENV PATH=$JAVA_HOME/bin:$PATH
 
 # copy slim-jre from base image (and jdeps + jlink work)
 COPY --from=builder /slim-jre $JAVA_HOME
@@ -39,4 +39,4 @@ COPY --from=builder /slim-jre $JAVA_HOME
 # copy project jar to work directory
 COPY --from=builder /job4j_devops/build/libs/DevOps-1.0.0.jar .
 
-ENTRYPOINT java -jar DevOps-1.0.0.jar
+ENTRYPOINT ["java", "-jar", "DevOps-1.0.0.jar"]
