@@ -39,4 +39,6 @@ COPY --from=builder /slim-jre $JAVA_HOME
 # copy project jar to work directory
 COPY --from=builder /job4j_devops/build/libs/DevOps-1.0.0.jar .
 
+EXPOSE 8080
+
 ENTRYPOINT ["java", "-jar", "DevOps-1.0.0.jar"]

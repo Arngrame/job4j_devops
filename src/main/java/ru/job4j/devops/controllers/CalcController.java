@@ -32,7 +32,7 @@ public class CalcController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("times")
+    @PostMapping("/times")
     public ResponseEntity<Result> times(@RequestBody TwoArgs twoArgs) {
         var result = new Result();
 
