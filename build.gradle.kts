@@ -68,6 +68,9 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
     testImplementation("org.awaitility:awaitility")
     testImplementation("org.testcontainers:kafka:1.20.4")
+
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
 }
 
 tasks.withType<Test> {
